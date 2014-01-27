@@ -13,6 +13,7 @@ classdef MLMTL_ConvexL2BallRadiusMTL
         function obj=MLMTL_ConvexL2BallRadiusMTL(parameters, name)
             if nargin>0
                 obj.parameters=parameters;
+                obj.currentParameters=obj.parameters;
             end
             if nargin>1
                 obj.name=name;
@@ -20,8 +21,8 @@ classdef MLMTL_ConvexL2BallRadiusMTL
         end
         
         function [obj, timeLong, localOutputs] = train(obj, data, outputs)
-            alpha=obj.currentParameters.alpha;
-            beta=obj.currentParameters.beta;
+            gamma=obj.currentParameters.gamma;          % gamma: parameter that ponders the importance of the regularizer. It can take any positive real value.
+            beta=obj.currentParameters.beta;            % beta: parameter of ADMM (see eq. 9 in the paper). It can take any positive real value.
             threshold=obj.currentParameters.threshold;
             nIt=obj.currentParameters.nIt;
             
@@ -30,9 +31,9 @@ classdef MLMTL_ConvexL2BallRadiusMTL
             indicators=data.indicators;
             
             if isfield (obj.currentParameters, 'radius')
-                radius=obj.currentParameters.radius;
+                radius=obj.currentParameters.radius;    % radius of the \ell_2 ball (see Sec. 3 of the paper). In principle it can take any positive real value.
             else
-                inputs=[];
+                inputs=[];                              % If it is not specified, it is estimated using last formula in pag. 6 in the paper. 
                 for t=1:length(trainYCell)
                     inputs=[inputs; trainYCell{t}];
                 end
@@ -42,11 +43,11 @@ classdef MLMTL_ConvexL2BallRadiusMTL
             if isfield (data, 'W')
                 W=data.W;
                 tic
-                [ estAllW tensorW ] = MLMTL_ConvexL2Ball_radius( trainXCell, trainYCell, indicators, beta, alpha, radius, nIt, threshold, W );
+                [ estAllW tensorW ] = MLMTL_ConvexL2Ball_radius( trainXCell, trainYCell, indicators, beta, gamma, radius, nIt, threshold, W );
                 timeLong=toc;
             else
                 tic
-                [ estAllW tensorW ] = MLMTL_ConvexL2Ball_radius( trainXCell, trainYCell, indicators, beta, alpha, radius, nIt, threshold );
+                [ estAllW tensorW ] = MLMTL_ConvexL2Ball_radius( trainXCell, trainYCell, indicators, beta, gamma, radius, nIt, threshold );
                 timeLong=toc;
             end
             
@@ -76,6 +77,7 @@ classdef MLMTL_ConvexL2BallRadiusMTL
         end
         
         function obj=setParameters(obj, pars)
+            obj.currentParameters=obj.parameters;
             nameParameters=fieldnames(pars);
             for i=1:length(nameParameters)
                 name=nameParameters{i};

@@ -100,7 +100,7 @@ while true
     
     Wmat=tenmat(full(W), 1);
     Wmat=Wmat.data;
-    disp(norm(Wmat(1:end)));
+%     disp(norm(Wmat(1:end)));
     if nargin>8 && ~isempty(groundW)
         disp(['RSE=' num2str(norm(Wmat(1:end)-groundW(1:end))/norm(groundW(1:end)))]);
     end

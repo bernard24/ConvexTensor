@@ -15,7 +15,7 @@ lInfBall=MLMTL_ConvexMTL(pars, 'l_{\infty} Ball');
 l2Ball=MLMTL_ConvexL2BallRadiusMTL(pars, 'l_2 Ball');
 scoreFunction=RMSEC;
 
-methods={nothing; lInfBall; l2Ball};  %lrtcVal;  %mlmtl; 
+methods={nothing; lInfBall; l2Ball};
 dataFunction=@completion2MTL;
 data=[];
 

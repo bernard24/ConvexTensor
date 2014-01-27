@@ -13,6 +13,7 @@ classdef MLMTL_ConvexMTL
         function obj=MLMTL_ConvexMTL(parameters, name)
             if nargin>0
                 obj.parameters=parameters;
+                obj.currentParameters=obj.parameters;
             end
             if nargin>1
                 obj.name=name;

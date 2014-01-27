@@ -3,7 +3,6 @@ function [dataConf DataParameters] = makeData(~, DataParameters)
 %   Detailed explanation goes here
 
 sizeIm=[112 160 3];
-% sizeIm=[50 50 3];
 
 noise=DataParameters.noise;
 
@@ -40,13 +39,9 @@ meanOriginalT=mean(originalT(1:end));
 originalT=originalT-meanOriginalT;
 
 originalT=originalT/256;
-%froNorm=norm(originalT(1:end));
-%originalT=originalT/(froNorm*DataParameters.realAlpha);%*4/3;
 %
 T=T-meanOriginalT;
-
 T=T/256;
-%T=T/(froNorm*DataParameters.realAlpha);%*4/3;
 
 for i=1:4
     mat=tenmat(originalT, i);
@@ -60,7 +55,5 @@ dataConf.originalTensor=tensor(originalT);
 dataConf.KnownInputs=tensor(KnownInputs);
 dataConf.Tensor=tensor(T);
 cd ../..
-
-% keyboard
 
 end
