@@ -9,7 +9,7 @@ DataParameters.noise=10^-3;                 % The variance of the Gaussian noise
 DataParameters.unknownPerc=0.5;             % Number of tensor inputs that are unknown.
 
 data = completion2MTL([], DataParameters);
-methodParameters.gamma=0.001;                 % Parameter that ponders the importance of the regularizer. It can take any positive real value.
+methodParameters.gamma=0.001;               % Parameter that ponders the importance of the regularizer. It can take any positive real value.
 methodParameters.beta=0.1;                  % Parameter of ADMM (see eq. 9 in the paper). It can take any positive real value.
 % methodParameters.radius=1;                % radius of the \ell_2 ball (see Sec. 3 of the paper). In principle it can take any positive real value.
                                             % If it is not specified, it is estimated using last formula in pag. 6 in the paper.
