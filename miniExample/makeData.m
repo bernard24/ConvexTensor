@@ -25,6 +25,8 @@ knownRow=[zeros(1,floor(nElements*unknownPerc)) ones(1, nElements-floor(nElement
 knownRow=knownRow(randperm(nElements));
 KnownInputs=tensor(knownRow,tensorDims);    % Select randomly the known inputs of the tensor
 
+% KnownInputs(1,:,:)=0;
+
 noisyVector=originalT.data(1:end)+randn(1,prod(tensorDims))*noise;
 T=tensor(noisyVector, tensorDims);
 

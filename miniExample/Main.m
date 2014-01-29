@@ -6,7 +6,7 @@ DataParameters.tensorDims=[20,20,20];       % Vector with the dimensions of the 
 DataParameters.tensorRank=[15 7 3];         % Vector with the Tucker ranks of the tensor
 DataParameters.FrobeniusNorm=1;             % Frobenius norm of the ground truth tensor
 DataParameters.noise=10^-3;                 % The variance of the Gaussian noise added to the ground truth tensor
-DataParameters.unknownPerc=0.8;             % Number of tensor inputs that are unknown.
+DataParameters.unknownPerc=0.5;             % Number of tensor inputs that are unknown.
 
 data = completion2MTL([], DataParameters);
 methodParameters.gamma=0.001;                 % Parameter that ponders the importance of the regularizer. It can take any positive real value.

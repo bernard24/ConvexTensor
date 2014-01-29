@@ -14,6 +14,7 @@ AA=A*A';
 l=diag(sqrt(diag(l2)));
 invl2=diag(1./sqrt(diag(l2)));
 v=(invl2*u'*A)';
+v(isnan(v))=0; %% For (near) singular A, some columns of v are spurious and thus set to 0.
 
 end
 
