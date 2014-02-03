@@ -37,7 +37,11 @@ classdef MLMTL_ConvexL2BallRadiusMTL
                 for t=1:length(trainYCell)
                     inputs=[inputs; trainYCell{t}];
                 end
-                radius=sqrt( norm(inputs)^2 + (mean(inputs)^2+var(inputs))*(prod(indicators)-length(inputs)) );
+                radiusRatio=1.35;
+                if isfield (obj.currentParameters, 'radiusRatio')
+                    radiusRatio=obj.currentParameters.radiusRatio;
+                end
+                radius=radiusRatio*sqrt( norm(inputs)^2 + (mean(inputs)^2+var(inputs))*(prod(indicators)-length(inputs)) );
             end
                 
             if isfield (data, 'W')

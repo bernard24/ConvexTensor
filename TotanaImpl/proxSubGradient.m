@@ -30,8 +30,7 @@ noNewsCounter=0;
 
 
 counter=0;
-while noNewsCounter<limitCounter
-
+while noNewsCounter<limitCounter 
     counter=counter+1;
     stepsize=initialStepsize/sqrt(counter);
     ya=y(1:r);

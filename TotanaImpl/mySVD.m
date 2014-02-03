@@ -10,11 +10,17 @@ if nRows>=nCols
     return
 end
 AA=A*A';
+if isnan(sum(sum(AA)))
+    keyboard
+end
 [u l2 v2]=svd(AA);
-l=diag(sqrt(diag(l2)));
-invl2=diag(1./sqrt(diag(l2)));
-v=(invl2*u'*A)';
-v(isnan(v))=0; %% For (near) singular A, some columns of v are spurious and thus set to 0.
+l=sqrt(diag(l2));
+invl2=1./l;
+invl2(l<eps)=0; %% For (near) singular A, some columns of v are spurious and thus set to 0.
+l=diag(l);
+invl2=diag(invl2);
 
+v=(invl2*u'*A)';
+v(isnan(v))=0; 
 end
 
