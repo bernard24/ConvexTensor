@@ -28,7 +28,7 @@ bestR=r;
 bestW=w;
 noNewsCounter=0;
 
-
+overallCounter=0;
 counter=0;
 while noNewsCounter<limitCounter 
     counter=counter+1;
@@ -48,10 +48,15 @@ while noNewsCounter<limitCounter
         bestW=w;
         bestR=r;
         noNewsCounter=0;
+        overallCounter=overallCounter+1;
+        if overallCounter>10^6
+            disp('josebi')
+            break
+        end
     else
         noNewsCounter=noNewsCounter+1;
     end
 end
-
+% disp(overallCounter)
 end
 
